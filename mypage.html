@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>마이페이지</title>
+    <link rel="stylesheet" href="mypage.css">
+    <script>
+        function loadNav() {
+            fetch('nav.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('nav-placeholder').innerHTML = data;
+                });
+        }
+        
+        function validateForm(event) {
+            event.preventDefault(); // 기본 폼 제출 동작 방지
+            
+            // 입력란 값 가져오기
+            const height = document.getElementById('height').value;
+            const weight = document.getElementById('weight').value;
+            const muscle = document.getElementById('muscle').value;
+            const fat = document.getElementById('fat').value;
+
+            // 라디오 버튼 값 가져오기
+            const sexRadios = document.getElementsByName('sex');
+            let sexSelected = false;
+            for (const radio of sexRadios) {
+                if (radio.checked) {
+                    sexSelected = true; // 라디오 버튼이 선택되었는지 확인
+                    break;
+                }
+            }
+
+            // 모든 입력란이 채워졌는지 확인
+            if (!sexSelected) {
+                alert('성별을 선택해주세요.'); // 라디오 버튼이 선택되지 않았을 경우 메시지 표시
+            } else if (height && weight && muscle && fat) {
+                alert('저장되었습니다.'); // 입력이 모두 완료되면 메시지 표시
+                // 여기서 데이터를 저장하는 로직을 추가할 수 있습니다.
+            } else {
+                alert('모든 입력란을 작성해주세요.'); // 입력이 부족할 경우 메시지 표시
+            }
+        }
+
+        window.onload = function() {
+            loadNav(); // 페이지 로드 시 네비게이션 바 로드
+            const form = document.querySelector('form');
+            form.addEventListener('submit', validateForm); // 폼 제출 시 검증 함수 호출
+        };
+    </script>
+</head>
+<body>
+    <div id="nav-placeholder"></div>
+    <div class="box">
+        <form>
+            <fieldset>
+                <div class='radio'>
+                    <input type="radio" id="male" name="sex" value="male" />
+                    <label for="male" class="custom-radio"></label><span>남</span>
+                    <input type="radio" id="female" name="sex" value="female" />
+                    <label for="female" class="custom-radio"></label><span>여</span>
+                </div>
+                
+                <div class="information">
+                    <legend>키</legend>
+                    <input type="number" id="height" name="height" >
+                    <span>cm</span>
+                    <legend>몸무게</legend>
+                    <input type="number" id="weight" name="weight" >
+                    <span>kg</span>
+                    <legend>골격근량</legend>
+                    <input type="number" id="muscle" name="muscle" >
+                    <span>kg</span>
+                    <legend>체지방률</legend>
+                    <input type="number" id="fat" name="fat" >
+                    <span>kg</span>
+                </div>  
+
+                <div class="container">
+                    <button class="btn1" type="submit">저장하기</button>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</body>
+</html>

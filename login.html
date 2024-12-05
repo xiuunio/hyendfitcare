@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>식단관리 앱 - 로그인</title>
+    <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" href="nav.css"> <!-- nav.css 추가 -->
+    <script>
+        function loadNav() {
+            fetch('nav.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('nav-placeholder').innerHTML = data;
+                });
+        }
+        window.onload = loadNav; // 페이지 로드 시 네비게이션 바 로드
+    </script>
+</head>
+<body>
+    <div id="nav-placeholder"></div>
+    <table>
+        <tr>
+            <td>
+                <div class="input-container">
+                    <img src="email.png" alt="이메일" class="left-image">
+                    <input type="text" placeholder="이메일">
+                </div>
+                <div class="line"></div> 
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="input-container">
+                    <img src="lock.png" alt="좌물쇠" class="left-image">
+                    <input type="password" placeholder="비밀번호">
+                </div>
+                <div class="line"></div> 
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="checkbox-container">
+                    <input type="checkbox" id="remember-me">
+                    <label for="remember-me">로그인 정보 저장</label>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="container">
+                    <button class="btn1" onclick="location.href='index.html';">로그인</button>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="container">
+                    <button class="btn2" onclick="location.href='join.html';">회원가입</button>
+                    <button class="btn3" onclick="location.href='codesend.html';">비밀번호 찾기</button>
+                </div>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

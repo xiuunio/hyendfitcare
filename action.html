@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>action</title>
+    <link rel="stylesheet" href="action.css">
+    <script>
+        function loadNav() {
+            fetch('nav.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('nav-placeholder').innerHTML = data;
+                });
+        }
+        window.onload = loadNav; // 페이지 로드 시 네비게이션 바 로드
+    </script>
+</head>
+<body>
+    <div id="nav-placeholder"></div>
+    <div class = "box">
+        
+        <div class = "form-container">
+            <form>
+                <fieldset>
+                    <div class = "day">
+                        <input type ="number" id = "month" name = "month" min = "1" max = "12" required/><span>월</span>
+                        <input type = "number" id = "date" name = "date" min = "1" max = "31" required/><span>일</span>
+                    </div>
+                    <div class = "exercise-container">
+                        <div class = "exercise">
+                            <input type = "text" id = "what"/>
+                            <input type = "number" id = "time" name = "time"/><span>분</span>
+                        </div>
+                    </div>
+
+                    <div class="button-container">
+                        <button class="btn1" id="add-button">
+                            <img src="plus.png" alt="추가" class="btn-icon">추가하기
+                        </button>
+                    </div>
+                    <div>
+                        <button class="btn2" onclick="location.href='receipt2.html';">활동량 계산</button>
+                    </div>
+                </fieldset>
+
+                <script>
+                    document.querySelector('.add').addEventListener('click', function(event) {
+                        event.preventDefault(); // 기본 버튼 동작 방지
+                
+                        // 새로운 exercise div 생성
+                        const newExercise = document.createElement('div');
+                        newExercise.className = 'exercise';
+                        newExercise.innerHTML = `
+                            <input type="text" id = "what"/>
+                            <input type="number" id = "time" min="1"/><span>분</span>
+                        `;
+                
+                        // exercise-container에 새로운 exercise 추가
+                        document.querySelector('.exercise-container').appendChild(newExercise);
+                    });
+                </script>
+            </form>
+        </div>
+    </div>
+
+    <!-- 버튼 -->
+    <div class="user-buttons">
+        <button class="btn3" onclick="location.href='action.html';">활동량 기록</button>
+        <button class="btn4" onclick="location.href='view2.html';">기록 보기</button>
+    </div>
+    
+</body>
+</html>

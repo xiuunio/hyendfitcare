@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="receipt1.css"> 
+    <title>칼로리 영수증</title>
+    <script>
+        function loadNav() {
+            fetch('nav.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('nav-placeholder').innerHTML = data;
+                })
+                .catch(error => console.error('Error loading nav:', error));
+        }
+        
+        function loadContent() {
+            // 네비게이션 로드
+            loadNav();
+
+            // 저장된 칼로리 데이터 로드
+            let calorieData = JSON.parse(localStorage.getItem('calorieData')) || [];
+            const itemsContainer = document.getElementById('items-container');
+            let totalCalories = 0;
+
+            if (calorieData.length > 0) {
+                const lastRecord = calorieData[calorieData.length - 1];
+                const date = lastRecord.date;
+                document.getElementById('receipt-title').innerText = `${date} 칼로리 영수증`;
+
+                lastRecord.meals.forEach(item => {
+                    const foodItem = document.createElement('div');
+                    foodItem.classList.add('item');
+                    
+                    const foodName = document.createElement('span');
+                    foodName.classList.add('food-name');
+                    foodName.textContent = item.foodName;
+                    
+                    const foodCalories = document.createElement('span');
+                    foodCalories.classList.add('food-calories');
+                    foodCalories.textContent = `${item.calories} kcal`;
+
+                    // 칼로리 항목 추가
+                    foodItem.appendChild(foodName);
+                    foodItem.appendChild(foodCalories);
+                    itemsContainer.appendChild(foodItem);
+
+                    // 합계 계산
+                    totalCalories += item.calories;
+                });
+            }
+
+            // 합계 표시
+            document.getElementById('total-calories').textContent = `${totalCalories} kcal`;
+        }
+
+        // 페이지 로드 시 실행
+        window.onload = loadContent;
+    </script>
+</head>
+<body>
+    <!-- 네비게이션 바가 로드될 위치 -->
+    <div id="nav-placeholder"></div>
+
+    <!-- 칼로리 영수증 -->
+    <div class="receipt-container">
+        <div class="receipt">
+            <div class="receipt-header">
+                <span class="receipt-title" id="receipt-title">칼로리 영수증</span>
+            </div>
+            
+            <div id="items-container"></div>
+
+            <div class="total">
+                <hr class="line">
+                <span class="total-text">=</span>
+                <span class="total-calories" id="total-calories">0 kcal</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 버튼 -->
+    <div class="user-buttons">
+        <button class="btn3" onclick="location.href='dietlog.html';">식단 기록</button>
+        <button class="btn4" onclick="location.href='view1.html';">기록 보기</button>
+    </div>
+</body>
+</html>

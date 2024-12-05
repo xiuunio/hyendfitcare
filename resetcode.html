@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>식단관리 앱 - 비밀번호 재설정</title>
+    <link rel="stylesheet" href="resetcode.css">
+    <link rel="stylesheet" href="nav.css">
+    <script>
+        function loadNav() {
+            fetch('nav.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('nav-placeholder').innerHTML = data;
+                });
+        }
+        window.onload = loadNav;
+    </script>
+</head>
+<body>
+    <!-- 네비게이션 영역 -->
+    <div id="nav-placeholder"></div>
+
+    <!-- 본문 -->
+    <table>
+        <tr>
+            <td>
+                <div class="input-container">
+                    <img src="lock.png" alt="좌물쇠" class="left-image">
+                    <input type="password" id="password" placeholder="비밀번호" oninput="checkPasswordMatch()">
+                </div>
+                <div class="line"></div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="input-container">
+                    <img src="lock.png" alt="좌물쇠" class="left-image">
+                    <input type="password" id="confirmPassword" placeholder="비밀번호 확인" oninput="checkPasswordMatch()"> 
+                </div>
+                <div class="line"></div>
+                <div class="passwordError" id="passwordError" style="display: none;">
+                    *비밀번호가 일치하지 않습니다.
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="container">
+                    <button class="btn1" onclick="submitForm()">비밀번호 재설정</button>
+                </div>
+            </td>
+        </tr>
+    </table>
+
+    <script>
+        function checkPasswordMatch() {
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            const errorElement = document.getElementById('passwordError');
+
+            errorElement.style.display = password && confirmPassword && password !== confirmPassword
+                ? 'block' : 'none';
+        }
+
+        function submitForm() {
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            if (!password || !confirmPassword) {
+                alert("모든 필드를 채워주세요.");
+                return;
+            }
+
+            if (password !== confirmPassword) {
+                alert("비밀번호가 일치하지 않습니다.");
+                return;
+            }
+
+            alert("비밀번호가 재설정되었습니다. 로그인 페이지로 이동합니다.");
+            location.href = 'login.html';
+        }
+    </script>
+</body>
+</html>

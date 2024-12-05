@@ -1,0 +1,103 @@
+/* 전체 테이블 스타일 */
+table {
+    width: 280px;
+    height: 250px;
+    margin: auto;
+    font-size: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #FFDFDF;
+}
+
+/* 입력 컨테이너 스타일 */
+.input-container {
+    display: flex; /* 수평 배치 */
+    align-items: center; /* 수직 중앙 정렬 */
+    position: relative; /* 자식 요소인 line과 입력란을 정렬할 수 있도록 */
+    margin-top: 10px; /* 위쪽 간격 */
+}
+
+/* 입력창 스타일 */
+input[type="text"], input[type="password"] {
+    width: 400px; /* 입력창 너비 */
+    height: 40px; /* 입력창 높이 */
+    font-size: 22px; /* 글자 크기 */
+    border-radius: 12px; /* 모서리 둥글기 */
+    outline: none;
+    padding: 10px;
+    background-color: #FFDFDF; /* 입력창 배경색 */
+    border: #FFDFDF;
+    color: #333; /* 입력창 글자 색상 */
+}
+
+.line {
+    width: 400px; /* 줄의 너비를 100%로 설정하여 입력란과 동일한 너비를 갖게 */
+    height: 2px; /* 구분선의 높이 */
+    background-color: #000000; /* 구분선 색상 */
+    margin-top: 5px; /* 입력창과 구분선 사이 간격 설정 */
+
+    margin-left: auto; /* 구분선 오른쪽 정렬 */
+    margin-right: 15px; /* 오른쪽 여백 0 */
+    margin-top: 0; /* 기본 마진 제거 */
+}
+
+/* 이미지 스타일 */
+.left-image {
+    margin-right: 20px; /* 이미지와 입력창 사이의 간격 */
+    width: 60px; /* 이미지 크기 조정 */
+    height: auto; /* 비율 유지 */
+    margin-top: 6px; /* 이미지 위쪽 간격 조정 (줄임) */
+    left: -268px;
+}
+
+/* 체크박스 스타일 */
+.checkbox-container {
+    display: flex; 
+    align-items: center; 
+    margin-top: 10px; 
+    margin-left: 10px;
+    font-size: 15px;
+    color: #1C0303;
+}
+
+/* 버튼 스타일 */
+.btn1, .btn2, .btn3 {
+    height: 57px;
+    font-family: 'Inter';
+    font-style: normal;
+    color: #FFDFDF;
+    border-radius: 50px;
+    font-weight: 600;
+    display: flex;
+    justify-content: center; /* 버튼 안 텍스트 가운데 정렬 */
+    align-items: center; /* 버튼 안 텍스트 가운데 정렬 */
+    background: #1C0303;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn1 {
+    width: 499px;
+    font-size: 24px;
+    line-height: 29px;
+}
+
+.btn2, .btn3 {
+    width: 238px;
+    font-size: 20px;
+    line-height: 24px;
+}
+
+/* 버튼 hover 효과 추가 */
+.btn1:hover, .btn2:hover, .btn3:hover {
+    background-color: #4A0A0A; /* hover 시 배경색 변경 */
+}
+
+/* 버튼 컨테이너 스타일 */
+.container {
+    display: flex; /* Flexbox 활성화 */
+    justify-content: center; /* 수평 가운데 정렬 */
+    gap: 20px; /* 버튼 간 간격 조정 */
+    margin-top: 20px; /* 버튼 그룹과 위 요소 사이 간격 */
+}

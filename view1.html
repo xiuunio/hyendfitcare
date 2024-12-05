@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="view1.css">
+    <title>식단 기록 보기</title>
+    <script>
+        function loadNav() {
+            fetch('nav.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('nav-placeholder').innerHTML = data;
+                });
+        }
+    </script>
+    <script src="/script.js"></script>
+</head>
+<body>
+    <div class="user-buttons">
+        <button class="btn3" onclick="location.href='dietlog.html';">식단 기록</button>
+        <button class="btn4" onclick="location.href='view1.html';">기록 보기</button>
+    </div>
+    
+    <div id="nav-placeholder"></div>
+    <div class = "box">
+            <!-- 날짜 선택 -->
+        <div class="wrapper">
+            <header>
+                <div class="nav">
+                    <button class="material-icons" id = "prev"> < </button>
+                    <p class="current-date">
+                        <script>
+                            let currentDate = document.querySelector('.current-date');
+                            currentDate.innerHTML = `${months[currMonth]}월 ${currYear}`;
+                        </script>
+                    </p>
+                    <button class="material-icons" id = "next"> > </button>
+                </div>
+                </header>
+                <div class="calendar">
+                <ul class="weeks">
+                    <li>SUN</li>
+                    <li>MON</li>
+                    <li>TUE</li>
+                    <li>WED</li>
+                    <li>THU</li>
+                    <li>FRI</li>
+                    <li>SAT</li>
+                </ul>
+
+                <ul class="days">
+                    <script>
+                        const daysTag = document.querySelector('.days');
+                        const renderCalendar = () => {
+                            currentDate.innerHTML = `${months[currMonth]}월 ${currYear}`;
+                            let lastDateofMonth = new Date(currYear, currMonth + 1, 0).getDate(); 
+                            let firstDayofMonth = new Date(currYear, currMonth, 1).getDay();
+                            let lastDayofMonth = new Date(currYear, currMonth, lastDateofMonth).getDay(); 
+                            let lastDateofLastMonth = new Date(currYear, currMonth, 0).getDate();
+
+
+                            let liTag = '';
+                            for (let i = firstDayofMonth; i > 0; i--) {
+                                liTag += `<li class = "inactive">${lastDateofLastMonth - i + 1}</li>`;
+                            }
+                            for (let i = 1; i <= lastDateofMonth; i++) {
+                                liTag += `<li>${i}</li>`;
+                            }
+                            
+                            for (let i = lastDayofMonth; i < 6; i++) {
+                                liTag += `<li class = "inactive">${i - lastDayofMonth + 1}</li>`;
+                            }
+                            daysTag.innerHTML = liTag;
+                            
+                            
+                        };
+                        const prevNextIcon = document.querySelectorAll('.material-icons');
+                        prevNextIcon.forEach((icon) => {
+                            icon.addEventListener('click', () => {
+                                
+                                currMonth = icon.id === 'prev' ? currMonth - 1 : currMonth + 1;
+                                if (currMonth < 0 || currMonth > 11) {
+                                    date = new Date(currYear, currMonth);
+                                    currYear = date.getFullYear(); 
+                                    currMonth = date.getMonth(); 
+                                    } else {
+                                    date = new Date();
+                                    }
+                                renderCalendar(); // 달력 다시 렌더링
+                            });
+                        });
+                        renderCalendar();
+                    </script>
+                </ul>
+            </div>
+        </div>
+
+        <script>
+            window.onload = function() {
+                loadNav();
+                // 달력 자동으로 열리게 하기 위해
+                const calendarInput = document.getElementById('calendar');
+                calendarInput.focus(); // 달력 열기
+                
+                // 달력에서 선택한 날짜를 가져옵니다.
+                const receiptTitle = document.getElementById('receipt-title');
+                const itemsContainer = document.getElementById('items-container');
+                const totalCaloriesElement = document.getElementById('total-calories');
+
+                // 칼로리 데이터 로드
+                let calorieData = JSON.parse(localStorage.getItem('calorieData')) || [];
+                
+                // 달력 날짜 선택 후 해당 날짜의 기록 표시
+                calendarInput.addEventListener('change', function() {
+                    const selectedDate = calendarInput.value;
+                    const selectedRecord = calorieData.find(record => record.date === selectedDate);
+
+                    if (selectedRecord) {
+                        receiptTitle.innerText = `${selectedDate} 칼로리 영수증`;
+                        itemsContainer.innerHTML = ''; // 기존 항목 비우기
+                        let totalCalories = 0;
+
+                        selectedRecord.meals.forEach(item => {
+                            const foodItem = document.createElement('div');
+                            foodItem.classList.add('item');
+
+                            const foodName = document.createElement('span');
+                            foodName.classList.add('food-name');
+                            foodName.textContent = item.foodName;
+
+                            const foodCalories = document.createElement('span');
+                            foodCalories.classList.add('food-calories');
+                            foodCalories.textContent = `${item.calories} kcal`;
+
+                            // 칼로리 항목 추가
+                            foodItem.appendChild(foodName);
+                            foodItem.appendChild(foodCalories);
+                            itemsContainer.appendChild(foodItem);
+
+                            // 합계 계산
+                            totalCalories += item.calories;
+                        });
+
+                        // 합계 표시
+                        totalCaloriesElement.textContent = `${totalCalories} kcal`;
+                    } else {
+                        // 해당 날짜에 기록이 없을 경우
+                        receiptTitle.innerText = `해당 날짜에 기록이 없습니다.`;
+                        itemsContainer.innerHTML = '';
+                        totalCaloriesElement.textContent = '0 kcal';
+                    }
+                });
+            };
+        </script>
+    </div>
+</body>
+</html>

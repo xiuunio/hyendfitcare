@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>식단관리 앱 - 인증코드 확인</title>
+    <link rel="stylesheet" href="codecheck.css">
+</head>
+<body>
+    <div id="nav-placeholder"></div> <!-- 네비게이션 바를 위한 자리 -->
+
+    <script>
+        function loadNav() {
+            fetch('nav.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('nav-placeholder').innerHTML = data;
+                });
+        }
+        window.onload = loadNav; // 페이지 로드 시 네비게이션 바 로드
+    </script>
+
+    <div class="container">
+        <div class="email-text">이메일로 전송된 인증코드를 적어주세요</div>
+        <div class="input-container">
+            <input type="text" class="code-input" id="input1" maxlength="1" 
+                   oninput="moveFocus(this, 'input2'); validateCode()">
+            <input type="text" class="code-input" id="input2" maxlength="1" 
+                   oninput="moveFocus(this, 'input3'); validateCode()">
+            <input type="text" class="code-input" id="input3" maxlength="1" 
+                   oninput="moveFocus(this, 'input4'); validateCode()">
+            <input type="text" class="code-input" id="input4" maxlength="1" 
+                   oninput="validateCode()">
+        </div>
+    </div>
+
+    <script>
+        // URL에서 인증 코드 추출
+        const urlParams = new URLSearchParams(window.location.search);
+        const correctCode = urlParams.get('code');
+
+        // 입력된 값 확인
+        function validateCode() {
+            const input1 = document.getElementById('input1').value;
+            const input2 = document.getElementById('input2').value;
+            const input3 = document.getElementById('input3').value;
+            const input4 = document.getElementById('input4').value;
+
+            const enteredCode = input1 + input2 + input3 + input4;
+
+            // 코드 맞으면 resetcode.html로 이동
+            if (enteredCode === correctCode) {
+                window.location.href = "resetcode.html";
+            }
+        }
+
+        // 입력하면 다음 입력창으로 포커스를 이동
+        function moveFocus(current, nextInputId) {
+            if (current.value.length === current.maxLength) {
+                const nextInput = document.getElementById(nextInputId);
+                if (nextInput) {
+                    nextInput.focus();
+                }
+            }
+        }
+    </script>
+</body>
+</html>

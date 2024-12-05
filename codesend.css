@@ -1,0 +1,124 @@
+/* 전체 배경색 설정 및 수직 중앙 정렬 */
+#nav-placeholder {
+    z-index: 1000;
+}
+.box{
+    display: flex;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    justify-content: center; /* 수평 중앙 정렬 */
+    align-items: center; /* 수직 중앙 정렬 */
+}
+
+/* 전체 테이블 스타일 */
+table {
+    width: 280px;
+    height: 250px;
+    margin: auto;
+    font-size: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #FFDFDF;
+}
+
+/* 이메일 입력창 스타일 */
+input[type="email"] {
+    width: 400px; 
+    height: 30px; 
+    font-size: 22px;
+    border-radius: 12px; 
+    outline: none;
+    padding: 10px;
+    background-color: #FFDFDF; /* 입력창 배경색 */
+    border: 1px solid #FFDFDF; /* 테두리 색상 */
+    color: #333; /* 입력창 글자 색상 */
+    transition: border-color 0.3s, background-color 0.3s; /* hover, focus 애니메이션 */
+}
+
+/* 입력창 컨테이너 */
+.input-container {
+    display: flex; /* 수평 배치 */
+    align-items: center; /* 수직 중앙 */
+    margin-top: 5px; /* 입력창과 위쪽 요소 사이의 간격 조정 */
+    margin-left: 100px;/
+}
+
+/* 버튼 스타일 */
+.btn1, .btn2, .btn3 {
+    height: 57px;
+    font-family: 'Inter';
+    font-style: normal;
+    color: #FFDFDF;
+    border-radius: 30px;
+    font-weight: 600;
+    display: flex;
+    justify-content: center; /* 버튼 안 텍스트 가운데 정렬 */
+    align-items: center; /* 버튼 안 텍스트 가운데 정렬 */
+    background: #1C0303;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn1 {
+    width: 402px;
+    font-size: 24px;
+    line-height: 33px;
+}
+
+.btn2, .btn3 {
+    width: 238px;
+    font-size: 20px;
+    line-height: 24px;
+}
+
+/* 버튼 hover 효과 추가 */
+.btn1:hover, .btn2:hover, .btn3:hover {
+    background-color: #4A0A0A; /* hover 시 배경색 변경 */
+}
+
+/* 버튼 컨테이너 스타일 */
+.container {
+    display: flex; /* Flexbox 활성화 */
+    justify-content: center; /* 수평 가운데 정렬 */
+    gap: 20px; /* 버튼 간 간격 조정 */
+    margin-top: 20px; /* 버튼 그룹과 위 요소 사이 간격 */
+}
+
+/* 구분선 스타일 */
+.line {
+    width: 300px;
+    height: 2px; /* 구분선의 높이 */
+    background-color: #000000; /* 구분선 색상 */
+    margin-top: 5px; /* 입력창과 구분선 사이 간격 설정 */
+
+    margin-left: auto; /* 구분선 오른쪽 정렬 */
+    margin-right: 116px; /* 오른쪽 여백 0 */
+    margin-top: 0; /* 기본 마진 제거 */
+}
+
+/* 이미지 스타일 */
+.left-image {
+    margin-right: 20px; /* 이미지와 입력창 사이의 간격 */
+    width: 60px; /* 이미지 크기 조정 */
+    height: auto; /* 비율 유지 */
+    margin-top: 6px; /* 이미지 위쪽 간격 조정 (줄임) */
+    left: -270px;
+}
+
+/* 체크박스 스타일 */
+.checkbox-container {
+    display: flex; 
+    align-items: center; 
+    margin-top: 10px; 
+    font-size: 15px;
+    color: #1C0303;
+    left: -268px;
+}
+
+.checkbox-container input[type="checkbox"] {
+    margin-right: 5px; /* 체크박스와 레이블 사이의 간격 */
+    margin-left: 10px;
+    margin-bottom: 0; /* 불필요한 간격 제거 */
+}

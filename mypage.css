@@ -1,0 +1,132 @@
+#nav-placeholder {
+    z-index: 1000;
+}
+
+.box {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+fieldset {
+    position: absolute;
+    border: none;
+    top: 30%;
+    left: 40%;
+    font-size: 24px;
+    font-weight: 400;
+}
+
+.radio {
+    display: flex;
+    justify-content: center; /* 버튼 안 텍스트 가운데 정렬 */
+    align-items: center; 
+}
+
+.radio input[type="radio"] {
+    display: none;
+}
+
+.custom-radio {
+    position: relative;
+    display: inline-block;
+    width: 40px; /* 라디오 버튼 크기 */
+    height: 40px; /* 라디오 버튼 크기 */
+    border: 3px solid black; /* 테두리 색상 */
+    border-radius: 50%; /* 원형으로 만들기 */
+    background-color: transparent; /* 기본 배경색 투명 */
+    margin-right: 30px; /* 라디오 버튼 간격 */
+    cursor: pointer; /* 커서 모양 변경 */
+    line-height: 40px; /* 텍스트 수직 정렬을 위한 라인 높이 */
+}
+
+span {
+    margin-right: 75px;
+}
+
+.radio input[type="radio"]:checked + .custom-radio {
+    background-color: #FFDFDF;
+}
+
+/* 선택된 라디오 버튼의 내부 원 */
+.radio input[type="radio"]:checked + .custom-radio::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 23px; /* 내부 원 크기 */
+    height: 23px; /* 내부 원 크기 */
+    background-color: black; /* 내부 원 색상 */
+    border-radius: 50%; /* 원형으로 만들기 */
+    transform: translate(-50%, -50%); /* 중앙 정렬 */
+}
+
+input[type="number"] {
+    background: transparent;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid #000;
+    margin-bottom: 18px;
+}
+
+.information input[type="number"] {
+    width: 330px;
+    height: 35px;
+    text-align: right;
+    font-size: 32px;
+    font-weight: 600;
+}
+
+input[type="submit"] {
+    background-color: #000;
+    border: none;
+    border-radius: 30px;
+    width: 335px;
+    height: 65px;
+    color: #FFDFDF;
+    font-weight: 800;
+    font-size: 25px;
+    margin-top: 30px;
+    margin-left: -40px;
+}
+
+.information {
+    margin-top: 50px;
+    margin-left: 20px; 
+    margin-right: auto;
+}
+
+/* 버튼 스타일 */
+.btn1 {
+    height: 57px;
+    font-family: 'Inter';
+    font-style: normal;
+    color: #FFDFDF;
+    border-radius: 50px;
+    font-weight: 600;
+    display: flex;
+    justify-content: center; /* 버튼 안 텍스트 가운데 정렬 */
+    align-items: center; /* 버튼 안 텍스트 가운데 정렬 */
+    background: #1C0303;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-size: 30px;
+    width: 408px;
+    height: 85px;
+    margin-top: 0px;
+    margin-left: 0px; 
+    margin-right: auto;
+}
+
+/* 버튼 hover 효과 추가 */
+.btn1:hover {
+    background-color: #4A0A0A; /* hover 시 배경색 변경 */
+}
+
+/* 버튼 컨테이너 스타일 */
+.container {
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    margin-top: 20px; 
+}

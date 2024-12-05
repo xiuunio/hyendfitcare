@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>record</title>
+    <link rel="stylesheet" href="record.css">
+    <script>
+        function loadNav() {
+            fetch('nav.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('nav-placeholder').innerHTML = data;
+                });
+        }
+        window.onload = loadNav; // 페이지 로드 시 네비게이션 바 로드
+    </script>
+    <script src="/script.js"></script>
+</head>
+<body>
+    <div id="nav-placeholder"></div>
+    <div class = "box">
+        <ul>
+            <div class="action-record">
+                <li><button><a href = "/action.html">활동량 기록</a></button></li>
+            </div>
+            <div class = "show-record">
+                <li><button>기록보기</button></li>
+            </div>
+        </ul>
+        <div class="wrapper">
+            <header>
+                <div class="nav">
+                  <button class="material-icons" id = "prev"> < </button>
+                    <p class="current-date">
+                        <script>
+                            let currentDate = document.querySelector('.current-date');
+                            currentDate.innerHTML = `${months[currMonth]}월 ${currYear}`;
+                        </script>
+                    </p>
+                  <button class="material-icons" id = "next"> > </button>
+                </div>
+              </header>
+              <div class="calendar">
+                <ul class="weeks">
+                  <li>SUN</li>
+                  <li>MON</li>
+                  <li>TUE</li>
+                  <li>WED</li>
+                  <li>THU</li>
+                  <li>FRI</li>
+                  <li>SAT</li>
+                </ul>
+                <ul class="days">
+                    <script>
+
+                        const daysTag = document.querySelector('.days');
+                        const renderCalendar = () => {
+                            currentDate.innerHTML = `${months[currMonth]}월 ${currYear}`;
+                            let lastDateofMonth = new Date(currYear, currMonth + 1, 0).getDate(); 
+                            let firstDayofMonth = new Date(currYear, currMonth, 1).getDay();
+                            let lastDayofMonth = new Date(currYear, currMonth, lastDateofMonth).getDay(); 
+                            let lastDateofLastMonth = new Date(currYear, currMonth, 0).getDate();
+
+                            console.log(lastDateofMonth);
+                            let liTag = '';
+                            for (let i = firstDayofMonth; i > 0; i--) {
+                                liTag += `<li class = "inactive">${lastDateofLastMonth - i + 1}</li>`;
+                            }
+                            for (let i = 1; i <= lastDateofMonth; i++) {
+                                liTag += `<li>${i}</li>`;
+                            }
+                            
+                            for (let i = lastDayofMonth; i < 6; i++) {
+                                liTag += `<li class = "inactive">${i - lastDayofMonth + 1}</li>`;
+                            }
+                            daysTag.innerHTML = liTag;
+                            
+                            
+                        };
+                        const prevNextIcon = document.querySelectorAll('.material-icons');
+                        prevNextIcon.forEach((icon) => {
+                            icon.addEventListener('click', () => {
+                                
+                                currMonth = icon.id === 'prev' ? currMonth - 1 : currMonth + 1;
+                                if (currMonth < 0 || currMonth > 11) {
+                                    date = new Date(currYear, currMonth);
+                                    currYear = date.getFullYear(); 
+                                    currMonth = date.getMonth(); 
+                                    } else {
+                                    date = new Date();
+                                    }
+                                renderCalendar(); // 달력 다시 렌더링
+                            });
+                        });
+                        renderCalendar();
+                        
+                        
+                    </script>
+                  
+                </ul>
+            </div>
+        </div>
+    </div>    
+</body>
+    
+    

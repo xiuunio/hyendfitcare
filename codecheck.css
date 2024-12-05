@@ -1,0 +1,74 @@
+/* 전체 페이지 스타일 */
+#nav-placeholder {
+    z-index: 1000;
+    position: relative; /* nav 위치 조정을 위한 상대적 위치 지정 */
+}
+
+/* 부모 컨테이너 */
+.container {
+    display: flex;
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center; 
+    height: calc(100vh - 50px); 
+    font-family: 'Inter', sans-serif;
+    background-color: #FFDFDF;
+    width: 100%;
+    max-width: 600px; 
+    margin: 0 auto; 
+    padding: 20px;
+}
+
+
+/* 인증 코드 안내 텍스트 */
+.email-text {
+    font-size: 26px;
+    color: #1C0303;
+    margin-bottom: 35px;
+    text-align: center; /* 텍스트 중앙 정렬 */
+}
+
+/* 입력창 컨테이너 */
+.input-container {
+    display: flex;
+    justify-content: center; /* 입력창을 수평 중앙에 배치 */
+    gap: 50px; /* 입력창 사이의 간격 */
+    margin-bottom: 20px;
+}
+
+/* 각 입력창 스타일 */
+.code-input {
+    width: 67px;
+    height: 90px;
+    font-size: 30px;
+    font-weight: bold;
+    text-align: center;
+    border: 2px solid #1C0303;
+    border-radius: 8px;
+    background-color: #1C0303;
+    color: #FFDFDF;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.code-input:focus {
+    border-color: #4A0A0A;
+}
+
+/* 버튼 스타일 */
+.btn1 {
+    height: 50px;
+    width: 150px;
+    font-size: 18px;
+    font-weight: bold;
+    background-color: #1C0303;
+    color: #FFDFDF;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn1:hover {
+    background-color: #4A0A0A;
+}

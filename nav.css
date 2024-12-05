@@ -1,0 +1,39 @@
+*{
+    margin : 0;
+    padding : 0;
+    box-sizing: border-box;
+}
+
+body{
+    width : 100%;
+    height : 100vh;
+    background-color: #FFDFDF;
+    font-family: 'Inter', sans-serif;
+    font-size : 30px;
+    display : flex;
+
+}
+
+nav{
+    background-color: #1C0303;
+    color: #FFDFDF;
+    padding: 10px;
+    position : fixed;
+    width : 100%;
+    height : 95px;
+
+}
+ul{
+    display : flex;
+    justify-content: space-between;
+}
+
+ul li{
+    margin : 20px 50px;
+    display: inline-block;
+}
+a{
+    text-decoration: none;
+    color: #FFDFDF;
+    transition: color 0.3s ease;
+}

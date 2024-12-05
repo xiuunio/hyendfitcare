@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>식단관리 앱 - 로그인</title>
+    <link rel="stylesheet" href="join.css">
+    <link rel="stylesheet" href="nav.css"> <!-- nav.css 추가 -->
+    <script>
+        function loadNav() {
+            fetch('nav.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('nav-placeholder').innerHTML = data;
+                });
+        }
+        window.onload = loadNav; // 페이지 로드 시 네비게이션 바 로드
+    </script>
+</head>
+<body>
+    <div id="nav-placeholder"></div>
+    <table>
+        <tr>
+            <td>
+                <div class="input-container">
+                    <img src="name.png" alt="이름" class="left-image">
+                    <input type="text" id="username" placeholder="이름">
+                </div>
+                <div class="line"></div> <!-- 입력창 아래에 줄 추가 -->
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="input-container">
+                    <img src="email.png" alt="이메일" class="left-image">
+                    <input type="text" id="email" placeholder="이메일">
+                </div>
+                <div class="line"></div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="input-container">
+                    <img src="lock.png" alt="좌물쇠" class="left-image">
+                    <input type="password" id="password" placeholder="비밀번호" oninput="checkPasswordMatch()">
+                </div>
+                <div class="line"></div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="input-container">
+                    <img src="lock.png" alt="좌물쇠" class="left-image">
+                    <input type="password" id="confirmPassword" placeholder="비밀번호 확인" oninput="checkPasswordMatch()"> 
+                </div>
+                <div class="line"></div>
+                <div class="passwordError" id="passwordError" style="display: none;">
+                    *비밀번호가 일치하지 않습니다.
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="container">
+                    <button class="btn1" onclick="submitForm()">회원가입</button>
+                </div>
+            </td>
+        </tr>
+    </table>
+
+    <script>
+        function checkPasswordMatch() {
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            const errorElement = document.getElementById('passwordError');
+    
+            if (password && confirmPassword && password !== confirmPassword) {
+                errorElement.style.display = 'block'; // 경고 메시지 표시
+            } else {
+                errorElement.style.display = 'none'; // 경고 메시지 숨기기
+            }
+        }
+    
+        function submitForm() {
+            const errorElement = document.getElementById('passwordError');
+            const username = document.getElementById('username').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            
+            // 모든 입력 필드가 작성되었는지 확인
+            if (!username || !email || !password || !confirmPassword) {
+                alert("모든 입력 필드를 작성해 주세요.");
+                return false;
+            }
+            
+            // 비밀번호가 일치하지 않으면 경고 메시지를 띄우고 폼 제출을 막음
+            if (errorElement.style.display === 'block') {
+                alert("비밀번호가 일치하지 않습니다.");
+                return false; // 폼 제출을 막음
+            }
+
+            // 비밀번호가 일치하고 모든 입력이 완료되었으면 로그인 페이지로 이동
+            alert("회원가입이 완료되었습니다. 로그인 창으로 이동합니다.");
+            location.href = 'login.html'; // 로그인 페이지로 이동
+        }
+    </script>
+</body>
+</html>

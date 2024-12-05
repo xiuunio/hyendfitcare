@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>식단관리 앱 - 인증코드 요청</title>
+    <link rel="stylesheet" href="codesend.css">
+    <script>
+        function sendAuthCode() {
+            const emailInput = document.querySelector("#email");
+            const email = emailInput.value.trim();
+
+            if (!email) {
+                alert("이메일을 입력하세요.");
+                return;
+            }
+
+            // 인증코드 생성
+            const authCode = Math.floor(1000 + Math.random() * 9000); // 4자리 랜덤 코드
+
+            // 로컬 스토리지에 저장
+            localStorage.setItem("authCode", authCode);
+            localStorage.setItem("email", email);
+
+            // 이메일 전송 (가상, 실제로는 서버 요청 필요)
+            console.log(`인증코드: ${authCode} (이메일: ${email})`);
+            alert("인증코드가 이메일로 전송되었습니다!");
+
+            // 페이지 이동
+            window.location.href = "codecheck.html";
+        }
+        function loadNav() {
+            fetch('nav.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('nav-placeholder').innerHTML = data;
+                });
+        }
+        window.onload = loadNav;
+    </script>
+</head>
+<body>
+    <div id="nav-placeholder"></div>
+    <div class = "box">
+        
+        <table>
+            <tr>
+                <td>
+                    <div class="input-container">
+                        <img src="email.png" alt="이메일" class="left-image">
+                        <input type="email" id="email" placeholder="이메일">
+                    </div>
+                    <div class="line"></div> 
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="container">
+                        <button class="btn1" onclick="sendAuthCode()">인증코드 보내기</button>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>
